@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#174d3d">
+    <meta name="description" content="Manage student marks, grades, and results.">
+    <title>Student Records</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="./" aria-label="Student Management home">
+            <span class="brand-mark">S</span>
+            <span>STUDENT RECORDS</span>
+        </a>
+        <span class="topbar-note">ACADEMIC OFFICE <span class="live-dot"></span> LOCAL</span>
+    </header>
+    <main class="page-shell">
+        <section class="page-heading">
+            <div>
+                <span class="eyebrow">STUDENT MANAGEMENT SYSTEM <span class="heading-rule"></span> ACADEMIC REGISTER</span>
+                <h1>Student records<span class="period">.</span></h1>
+                <p class="page-summary">Marks, results, and class progress in one place.</p>
+            </div>
+            <div class="heading-count"><strong id="heading-count">00</strong><span>ENROLLED</span></div>
+        </section>
+
+        <p id="notice" class="notice" role="status" hidden></p>
+
+        <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
+            <div class="result-heading">
+                <div>
+                    <span class="eyebrow">STUDENT RESULT</span>
+                    <h2 id="result-title"></h2>
+                </div>
+                <button id="close-result" class="close-link" type="button">Close</button>
+            </div>
+            <div id="result-details" class="result-details"></div>
+        </section>
+
+        <section class="metric-strip" aria-label="Student summary">
+            <div class="metric metric-primary"><span class="metric-label">TOTAL STUDENTS</span><strong id="total-count">00</strong><span class="metric-note">active records</span></div>
+            <div class="metric"><span class="metric-label">CLASS AVERAGE</span><strong><span id="average-score">0.0</span><small>%</small></strong><span class="metric-note">across all subjects</span></div>
+            <div class="metric"><span class="metric-label">PASSING</span><strong id="passing-count">00</strong><span class="metric-note">all subjects at least 33</span></div>
+            <div class="metric metric-alert"><span class="metric-label">NEEDS ATTENTION</span><strong id="failing-count">00</strong><span class="metric-note">below 33 in a subject</span></div>
+        </section>
+
+        <div class="workspace-grid">
+            <aside class="form-column">
+                <section class="form-panel" aria-labelledby="form-title">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">RECORD ENTRY</span>
+                            <h2 id="form-title">Add a student</h2>
+                        </div>
+                        <span class="section-index">01</span>
+                    </div>
+                    <form id="student-form" class="student-form">
+                        <label for="roll-number">Roll number</label>
+                        <input id="roll-number" name="roll_number" required maxlength="40" autocomplete="off">
+                        <label for="student-name">Student name</label>
+                        <input id="student-name" name="name" required maxlength="100" autocomplete="name">
+                        <div class="marks-label-row">
+                            <span class="marks-title">Subject marks</span>
+                            <span>OUT OF 100</span>
+                        </div>
+                        <div class="marks-grid">
+                            <label for="python-marks">Python</label>
+                            <label for="mathematics-marks">Mathematics</label>
+                            <label for="english-marks">English</label>
+                            <input id="python-marks" name="python_marks" type="number" min="0" max="100" step="1" required>
+                            <input id="mathematics-marks" name="mathematics_marks" type="number" min="0" max="100" step="1" required>
+                            <input id="english-marks" name="english_marks" type="number" min="0" max="100" step="1" required>
+                        </div>
+                        <button id="submit-student" class="primary-button" type="submit">Add student<span aria-hidden="true">↗</span></button>
+                        <button id="cancel-edit" class="cancel-link cancel-button" type="button" hidden>Cancel edit</button>
+                    </form>
+                </section>
+            </aside>
+
+            <section class="records-section" aria-labelledby="records-title">
+                <div class="records-heading">
+                    <div>
+                        <span class="eyebrow">ROSTER</span>
+                        <h2 id="records-title">All students <span id="record-count" class="record-count">0 total</span></h2>
+                    </div>
+                    <form id="search-form" class="search-form" role="search">
+                        <label class="visually-hidden" for="student-search">Search by name or roll number</label>
+                        <input id="student-search" type="search" placeholder="Search students..." autocomplete="off">
+                        <button type="submit" aria-label="Search students">Search</button>
+                        <button id="clear-search" class="clear-search" type="button" hidden>Clear</button>
+                    </form>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr>
+                            <th>ROLL NO.</th><th>STUDENT</th><th>PYTHON</th><th>MATHS</th>
+                            <th>ENGLISH</th><th>TOTAL</th><th>PERCENT</th><th>GRADE</th>
+                            <th>STATUS</th><th>ACTIONS</th>
+                        </tr></thead>
+                        <tbody id="student-rows"></tbody>
+                    </table>
+                </div>
+                <div class="table-footer"><span>SUBJECTS: PYTHON · MATHEMATICS · ENGLISH</span><span>GRADING SCALE: A+ TO F</span></div>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">Student Management System <span>·</span> Browser storage</footer>
+</body>
+</html>

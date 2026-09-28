@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This beginner-friendly student manager provides a browser interface served by Python's built-in web server. Student records are saved in a CSV file and remain available after the app is restarted. The original console menu can also be run from `main.py`.
+This beginner-friendly student manager includes a Python web app backed by CSV, a console version, and a static browser version that can be hosted on GitHub Pages. The static version saves records in the current browser; it does not share data with the Python/CSV versions.
 
 ## Objective
 
@@ -14,12 +14,14 @@ Practice core Python by managing student records, calculating results, validatin
 - View and search student records in a table.
 - Update names and marks, or delete a record after a confirmation step.
 - Calculate totals, percentage, grade, and pass/fail status automatically.
-- Persist records in `students.csv`.
+- Persist Python app records in `students.csv`.
+- Run a static version on GitHub Pages with browser-local storage.
 
 ## Technologies Used
 
 - Python 3 and its standard library (`csv`, `html`, `http.server`, `os`, and `urllib.parse`)
-- HTML forms and CSS for the browser interface
+- HTML and CSS for the browser interface
+- JavaScript and browser local storage for the GitHub Pages version
 
 No third-party packages, frameworks, external APIs, or databases are used.
 
@@ -50,6 +52,12 @@ The app creates `students.csv` automatically if it is missing.
 
 To use the original console version instead, run `python3 main.py`.
 
+## GitHub Pages
+
+The static site is in `static/` and is deployed by the GitHub Actions workflow in `.github/workflows/pages.yml` whenever changes are pushed to `main`. In the repository, open **Settings > Pages** and set the build and deployment source to **GitHub Actions**. The deployment URL appears in the workflow run after it succeeds.
+
+The Pages version uses the browser's local storage. Records are saved only in that browser and are not written to `students.csv` or synchronized between devices.
+
 ## Project Structure
 
 ```text
@@ -57,7 +65,11 @@ student-management-system/
 ├── main.py          # CSV storage and student result calculations
 ├── web.py           # Local web server and browser pages
 ├── static/
-│   └── style.css    # Website layout and styling
+│   ├── index.html    # GitHub Pages entry point
+│   ├── app.js        # Browser-only student management
+│   └── style.css     # Website layout and styling
+├── .github/workflows/
+│   └── pages.yml    # GitHub Pages deployment workflow
 ├── students.csv     # Student records; created automatically if missing
 └── README.md        # Project overview and instructions
 ```
